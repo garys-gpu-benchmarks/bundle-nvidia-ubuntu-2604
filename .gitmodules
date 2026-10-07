@@ -1,0 +1,128 @@
+[submodule "benchmarks/nvidia-u26-401"]
+	path = benchmarks/nvidia-u26-401
+	url = ../401-sys-bench-nvidia-cuda-stack-validation-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-402"]
+	path = benchmarks/nvidia-u26-402
+	url = ../402-sys-bench-nvidia-gpu-health-validation-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-403"]
+	path = benchmarks/nvidia-u26-403
+	url = ../403-sys-bench-nvidia-system-stress-stability-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-404"]
+	path = benchmarks/nvidia-u26-404
+	url = ../404-gpu-bench-nvidia-sdc-ecc-integrity-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-405"]
+	path = benchmarks/nvidia-u26-405
+	url = ../405-gpu-bench-nvidia-pytorch-tensor-correctness-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-406"]
+	path = benchmarks/nvidia-u26-406
+	url = ../406-sys-bench-nvidia-fio-nvme-sweep-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-407"]
+	path = benchmarks/nvidia-u26-407
+	url = ../407-sys-bench-nvidia-stream-ddr5-bandwidth-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-408"]
+	path = benchmarks/nvidia-u26-408
+	url = ../408-sys-bench-nvidia-iperf3-network-performance-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-409"]
+	path = benchmarks/nvidia-u26-409
+	url = ../409-sys-bench-nvidia-multichase-numa-latency-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-410"]
+	path = benchmarks/nvidia-u26-410
+	url = ../410-sys-bench-nvidia-numa-cache-performance-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-411"]
+	path = benchmarks/nvidia-u26-411
+	url = ../411-sys-bench-nvidia-linux-perf-pmu-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-412"]
+	path = benchmarks/nvidia-u26-412
+	url = ../412-sys-bench-nvidia-lmbench-microbench-suite-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-413"]
+	path = benchmarks/nvidia-u26-413
+	url = ../413-sys-bench-nvidia-gups-random-memory-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-414"]
+	path = benchmarks/nvidia-u26-414
+	url = ../414-gpu-bench-nvidia-memcpy-transfer-bandwidth-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-415"]
+	path = benchmarks/nvidia-u26-415
+	url = ../415-gpu-bench-nvidia-babelstream-hbm-bandwidth-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-416"]
+	path = benchmarks/nvidia-u26-416
+	url = ../416-gpu-bench-nvidia-nccl-bandwidth-test-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-417"]
+	path = benchmarks/nvidia-u26-417
+	url = ../417-gpu-bench-nvidia-gemm-cublas-micro-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-418"]
+	path = benchmarks/nvidia-u26-418
+	url = ../418-gpu-bench-nvidia-cudnn-convolution-micro-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-419"]
+	path = benchmarks/nvidia-u26-419
+	url = ../419-gpu-bench-nvidia-torch-micro-suite-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-420"]
+	path = benchmarks/nvidia-u26-420
+	url = ../420-gpu-bench-nvidia-linpack-hpl-fp64-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-421"]
+	path = benchmarks/nvidia-u26-421
+	url = ../421-gpu-bench-nvidia-resnet50-pytorch-training-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-422"]
+	path = benchmarks/nvidia-u26-422
+	url = ../422-gpu-bench-nvidia-resnet50-pytorch-inference-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-423"]
+	path = benchmarks/nvidia-u26-423
+	url = ../423-gpu-bench-nvidia-bert-base-inference-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-424"]
+	path = benchmarks/nvidia-u26-424
+	url = ../424-gpu-bench-nvidia-sdxl-diffusers-latency-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-425"]
+	path = benchmarks/nvidia-u26-425
+	url = ../425-gpu-bench-nvidia-distilbert-hf-classification-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-426"]
+	path = benchmarks/nvidia-u26-426
+	url = ../426-gpu-bench-nvidia-jax-xla-forwardpass-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-427"]
+	path = benchmarks/nvidia-u26-427
+	url = ../427-gpu-bench-nvidia-vllm-kvcache-stress-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-428"]
+	path = benchmarks/nvidia-u26-428
+	url = ../428-gpu-bench-nvidia-vllm-throughput-latency-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-429"]
+	path = benchmarks/nvidia-u26-429
+	url = ../429-gpu-bench-nvidia-vllm-mistral-cuda-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-430"]
+	path = benchmarks/nvidia-u26-430
+	url = ../430-gpu-bench-nvidia-sglang-prompt-response-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-431"]
+	path = benchmarks/nvidia-u26-431
+	url = ../431-gpu-bench-nvidia-sglang-serving-latency-ubu2604.git
+	branch = main
+[submodule "benchmarks/nvidia-u26-432"]
+	path = benchmarks/nvidia-u26-432
+	url = ../432-gpu-bench-nvidia-rag-faiss-end2end-ubu2604.git
+	branch = main
