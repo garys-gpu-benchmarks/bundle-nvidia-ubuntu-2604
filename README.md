@@ -1,6 +1,6 @@
 # NVIDIA CUDA - Ubuntu 26.04 benchmark bundle
 
-All 32 benchmarks for this platform, each pinned to its tested v1.0.2 commit as a git submodule.
+All 32 benchmarks for this platform, each pinned to its tested v1.0.3 commit as a git submodule.
 Project home: https://github.com/garymichaelbass
 
 ```bash
