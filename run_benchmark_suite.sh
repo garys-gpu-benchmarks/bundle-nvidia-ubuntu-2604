@@ -237,7 +237,8 @@ run_one() {
 
   say ""
   say "${RULE_RUN}"
-  say "Starting: ${workload} (--${profile}, repeat ${pass} of ${repeat_count}, run ${run_number} of ${runs_total})"
+  say "Starting: ${workload}"
+  say "(--${profile}, repeat ${pass} of ${repeat_count}, run ${run_number} of ${runs_total})"
   say "$(timestamp)"
   printf '\n%s\n%s: bash run_benchmark.sh --%s\n' "${RULE_RUN}" "${workload}" "${profile}" >>"${log_file}"
 
