@@ -1,6 +1,6 @@
 # NVIDIA CUDA - Ubuntu 26.04 benchmark bundle
 
-All 32 benchmarks for this platform, each pinned to its tested v1.0.4 commit as a git submodule.
+All 32 benchmarks for this platform, each pinned to its tested v1.0.5 commit as a git submodule.
 Project home: https://github.com/garymichaelbass
 
 ## Install
@@ -8,23 +8,31 @@ Project home: https://github.com/garymichaelbass
 On a fresh Ubuntu machine, this downloads all 32 benchmarks into /opt/benchmarks:
 
 ```bash
+git clone --recurse-submodules https://github.com/garys-gpu-benchmarks/bundle-nvidia-ubuntu-2604 /opt/benchmarks
+```
+
+As a normal user (not root), first install git and create the folder:
+
+```bash
 sudo apt-get update && sudo apt-get install -y git
-sudo mkdir -p /opt/benchmarks
-sudo chown "$USER":"$USER" /opt/benchmarks
-cd /opt/benchmarks
-git clone --recurse-submodules https://github.com/garys-gpu-benchmarks/bundle-nvidia-ubuntu-2604.git
-cd bundle-nvidia-ubuntu-2604
-./run.sh list
+sudo mkdir -p /opt/benchmarks && sudo chown "$USER":"$USER" /opt/benchmarks
+git clone --recurse-submodules https://github.com/garys-gpu-benchmarks/bundle-nvidia-ubuntu-2604 /opt/benchmarks
+```
+
+Each benchmark is then in its own folder, for example /opt/benchmarks/401-…, next to run.sh and run_benchmark_suite.sh. Check with:
+
+```bash
+cd /opt/benchmarks && ./run.sh list
 ```
 
 `./run.sh list` should show all 32 benchmarks as `ready`. To download only the benchmarks you run, leave out `--recurse-submodules`: `./run.sh` then fetches each benchmark the first time it is used.
 
-Do not use Download ZIP: GitHub's ZIP files leave the benchmarks/ folders empty.
+Do not use Download ZIP: GitHub's ZIP files leave the benchmark folders empty.
 
 ## Run
 
 ```bash
-cd /opt/benchmarks/bundle-nvidia-ubuntu-2604
+cd /opt/benchmarks
 ./run.sh 405                 # setup, then a smoke run of benchmark 405
 ./run.sh 405 --baseline      # standard run
 ./run.sh all                 # all 32, logs in results/
@@ -37,7 +45,7 @@ The first benchmark's setup may install the GPU software stack, ask for your sud
 `run_benchmark_suite.sh` runs every installed benchmark with each profile (smoke, then baseline, then extended), prints one short block per run, keeps the full output in a log file, and ends with a pass/fail summary.
 
 ```bash
-cd /opt/benchmarks/bundle-nvidia-ubuntu-2604
+cd /opt/benchmarks
 ./run_benchmark_suite.sh                         # all 32 benchmarks, smoke + baseline + extended
 ./run_benchmark_suite.sh -p smoke                # quick check of everything
 ./run_benchmark_suite.sh -w 401,407,421 -p baseline  # chosen benchmarks only
@@ -48,11 +56,11 @@ cd /opt/benchmarks/bundle-nvidia-ubuntu-2604
 ## Update
 
 ```bash
-cd /opt/benchmarks/bundle-nvidia-ubuntu-2604
+cd /opt/benchmarks
 git pull && git submodule update --init --recursive
 ```
 
-If your copy has folders named like `benchmarks/amd-u24-101` (bundles published before full folder names), delete the bundle-nvidia-ubuntu-2604 folder and clone it again instead.
+If your copy keeps its benchmarks in a benchmarks/ subfolder (bundles published before v1.0.5), delete it and clone again instead, as shown under Install.
 
 ## Benchmarks
 

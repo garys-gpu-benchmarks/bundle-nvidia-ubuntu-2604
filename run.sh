@@ -3,7 +3,7 @@
 #   ./run.sh list | ./run.sh <NNN> [--baseline|--extended] | ./run.sh all
 set -uo pipefail
 cd "$(dirname "$0")"
-find_dir() { ls -d benchmarks/"$1"-* 2>/dev/null | head -n1; }
+find_dir() { local d; for d in "$1"-*/; do [ -d "$d" ] && { echo "${d%/}"; return; }; done; }
 ensure() {
   if [ ! -e "$1/.git" ]; then
     echo ">> fetching $(basename "$1")"
@@ -32,7 +32,7 @@ case "${1:-}" in
     done ;;
   all)
     pass=0; fail=0; failed=()
-    for d in benchmarks/*/; do
+    for d in [1-4][0-9][0-9]-*/; do
       n=$(basename "$d"); n=${n%%-*}
       if run_one "$n"; then pass=$((pass+1)); else fail=$((fail+1)); failed+=("$n"); fi
     done
