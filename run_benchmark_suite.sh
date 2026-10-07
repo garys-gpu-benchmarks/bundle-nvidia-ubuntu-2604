@@ -26,6 +26,7 @@ readonly SCRIPT_NAME="${0##*/}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 readonly SCRIPT_DIR
 readonly VALID_PROFILES=(smoke baseline extended)
+readonly LOG_SUBDIR="benchmark_suite_log"
 readonly RULE_PASS="######################################################################"
 readonly RULE_MODE="**********************************************************************"
 readonly RULE_RUN="======================================================================"
@@ -74,7 +75,8 @@ Options:
                          ./benchmarks next to this script, this script's
                          folder, /opt/benchmarks
   -o, --log FILE         Log file for the full output of every run.
-                         Default: <root>/run_benchmark_suite_<host>_<time>.log
+                         Default: <root>/benchmark_suite_log/
+                                  run_benchmark_suite_<host>_<time>.log
       --fail-fast        Stop at the first failed run.
   -n, --dry-run          Show what would run, without running anything.
   -h, --help             Show this help.
@@ -272,7 +274,7 @@ main() {
   resolve_workloads
 
   runs_total=$((repeat_count * ${#profiles[@]} * ${#workloads[@]}))
-  [[ -n "${log_file}" ]] || log_file="${root_dir}/run_benchmark_suite_$(hostname -s)_$(date '+%Y%m%d_%H%M%S').log"
+  [[ -n "${log_file}" ]] || log_file="${root_dir}/${LOG_SUBDIR}/run_benchmark_suite_$(hostname -s)_$(date '+%Y%m%d_%H%M%S').log"
 
   if [[ "${dry_run}" == true ]]; then
     echo "Dry run: nothing will be executed."
