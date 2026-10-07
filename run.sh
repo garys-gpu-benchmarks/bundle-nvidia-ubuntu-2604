@@ -3,7 +3,7 @@
 #   ./run.sh list | ./run.sh <NNN> [--baseline|--extended] | ./run.sh all
 set -uo pipefail
 cd "$(dirname "$0")"
-find_dir() { ls -d benchmarks/*-"$1" 2>/dev/null | head -n1; }
+find_dir() { ls -d benchmarks/"$1"-* 2>/dev/null | head -n1; }
 ensure() {
   if [ ! -e "$1/.git" ]; then
     echo ">> fetching $(basename "$1")"
@@ -25,15 +25,15 @@ run_one() {
 }
 case "${1:-}" in
   list)
-    git config -f .gitmodules --get-regexp '^submodule\..*\.url$' | while read -r key url; do
-      p=${key#submodule.}; p=${p%.url}
+    git config -f .gitmodules --get-regexp '^submodule\..*\.path$' | while read -r key p; do
+      name=$(basename "$p")
       state="not fetched"; [ -e "$p/.git" ] && state="ready"
-      printf '%-4s %-60s %s\n' "${p##*-}" "$(basename "$url" .git)" "$state"
+      printf '%-4s %-60s %s\n' "${name%%-*}" "$name" "$state"
     done ;;
   all)
     pass=0; fail=0; failed=()
     for d in benchmarks/*/; do
-      n=${d%/}; n=${n##*-}
+      n=$(basename "$d"); n=${n%%-*}
       if run_one "$n"; then pass=$((pass+1)); else fail=$((fail+1)); failed+=("$n"); fi
     done
     echo "== $pass passed, $fail failed ${failed[*]:-}" ;;
