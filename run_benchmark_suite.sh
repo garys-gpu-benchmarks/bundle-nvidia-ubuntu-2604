@@ -36,7 +36,7 @@ readonly RULE_RUN="=============================================================
 # Defaults (each can be changed with an option)
 # ------------------------------------------------------------------------------
 root_dir=""
-profiles_arg="smoke,baseline,extended"
+profiles_arg="smoke"
 workloads_arg=""
 repeat_count=1
 log_file=""
@@ -68,10 +68,10 @@ The whole set is repeated --repeat times.
 
 Options:
   -p, --profiles LIST    Profiles to run, comma-separated, in order.
-                         Default: smoke,baseline,extended
+                         Default: smoke   (full run: -p smoke,baseline,extended)
   -w, --workloads LIST   Workloads to run, by number, comma-separated.
                          Ranges are allowed. Default: every workload found.
-                         Examples: 101,107,121   301-310   101-105,120
+                         Examples: 401,407,421   401-410   401-405,420
   -r, --repeat N         Repeat the whole set N times. Default: 1
   -d, --root DIR         Directory holding the workload folders.
                          Default: the first of these that contains workloads:
@@ -92,10 +92,10 @@ Times are shown in the system time zone. To use another, set TZ, e.g.
   TZ=America/Chicago ./${SCRIPT_NAME}
 
 Examples:
-  ./${SCRIPT_NAME}                                  # all workloads, all 3 profiles
-  ./${SCRIPT_NAME} -p smoke                         # quick check of everything
-  ./${SCRIPT_NAME} -w 101,107,121 -p baseline       # three workloads, baseline only
-  ./${SCRIPT_NAME} -w 105 -p smoke --show-output    # one workload, output on screen
+  ./${SCRIPT_NAME}                                  # all workloads, smoke profile (the default)
+  ./${SCRIPT_NAME} -p smoke,baseline,extended   # everything, all 3 profiles (many hours)
+  ./${SCRIPT_NAME} -w 401,407,421 -p baseline       # three workloads, baseline only
+  ./${SCRIPT_NAME} -w 405 -p smoke --show-output    # one workload, output on screen
   ./${SCRIPT_NAME} -r 20                            # soak test: everything, 20 times
   ./${SCRIPT_NAME} --list                           # every workload should be ready
 EOF
@@ -208,7 +208,7 @@ expand_workload_numbers() {
     elif [[ "${item}" =~ ^[0-9]{3}$ ]]; then
       first=$((10#${item})); last=${first}
     else
-      die_usage "bad workload '${item}' (use numbers like 101, or ranges like 101-110)"
+      die_usage "bad workload '${item}' (use numbers like 401, or ranges like 401-410)"
     fi
     for ((n = first; n <= last; n++)); do
       wl_numbers+=("${n}")
