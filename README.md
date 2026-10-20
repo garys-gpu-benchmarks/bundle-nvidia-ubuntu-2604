@@ -1,7 +1,7 @@
 # NVIDIA CUDA - Ubuntu 26.04 benchmark bundle
 
 32 system and GPU benchmarks for NVIDIA GPU machines running Ubuntu 26.04,
-each pinned to its tested v1.0.16 release.
+each pinned to its tested v1.0.17 release.
 
 Use this bundle only on that platform. The others have their own bundle:
 [AMD 24.04](https://github.com/garys-gpu-benchmarks/bundle-amd-ubuntu-2404) ·
@@ -17,8 +17,8 @@ Use this bundle only on that platform. The others have their own bundle:
   Python environment) the first time it runs, and checks for at least 20 GiB
   free before it does. That check is per benchmark, not for the whole suite,
   and the AI benchmarks also download models.
-- A machine where installing the NVIDIA driver and CUDA and one restart are acceptable: the first
-  run installs them.
+- The NVIDIA driver already installed: `nvidia-smi` lists the GPUs. The first
+  run installs CUDA; it does not install the driver or restart the machine.
 - For the AI model benchmarks (423 to 432): if a model's license on Hugging
   Face requires it, accept the license there and set a token first:
   `export HF_TOKEN=hf_...`
@@ -37,6 +37,11 @@ Do not use GitHub's **Download ZIP**: it leaves the benchmark folders empty.
 
 ## Getting started
 
+Each command below ends with a summary like the samples shown. Your times,
+host name and log file name will differ; what matters is `0 failed`. If a run
+fails, the summary names it under `Failed runs:`; open the log file named on
+the summary's last line.
+
 ### 1. A CPU benchmark (about a minute, no GPU software)
 
 ```bash
@@ -45,48 +50,74 @@ cd /opt/benchmarks
 ```
 
 407 is STREAM, CPU memory bandwidth. It installs only a compiler and its own
-Python environment, not the NVIDIA driver and CUDA, and does not restart the machine. It ends
+Python environment, not CUDA, and does not restart the machine. It ends
 with Copy, Scale, Add and Triad rates in GB/s. Smoke uses 4 threads; the
 `baseline` profile is the figure to quote for this machine. If this run
 passes, the bundle, the suite runner, the results and the runtime ledger all
-work.
+work. It ends like this:
 
-### 2. The GPU software and two quick GPU checks
-
-```bash
-./run_benchmark_suite.sh -w 401,402,414 -p smoke   # first run installs the NVIDIA driver and CUDA: quiet for 5-20 minutes
+```text
+======================================================================
+SUMMARY: 1 of 1 runs finished: 1 passed, 0 failed
+Started:       Mon Oct 19 22:03:51 UTC 2026
+Completed:     Mon Oct 19 22:04:35 UTC 2026
+Total runtime: 0 hours 0 minutes 44 seconds
+Log file:      /opt/benchmarks/benchmark_suite_log/run_benchmark_suite_<host>_20261019_220351.log
+======================================================================
 ```
 
-The first GPU run prints nothing while it installs. To watch it, add
-`--show-output`, or in a second window run
+To see that run in the runtime ledger: `./show_metrics.sh 407`
+
+### 2. The GPU software and two quick GPU checks (5 to 20 minutes the first time)
+
+The first time, 401 installs CUDA, which takes 5 to 20 minutes. Run it
+either way:
+
+```bash
+./run_benchmark_suite.sh -w 401,402,414 -p smoke --show-output   # shows progress while CUDA installs
+./run_benchmark_suite.sh -w 401,402,414 -p smoke                 # quiet: prints nothing for 5 to 20 minutes
+```
+
+In quiet mode, watch progress from a second window with
 `tail -f /opt/benchmarks/401-*/results/install_status.txt`.
 
 | Benchmark | What it checks |
 |---|---|
-| 401 | installs the NVIDIA driver and CUDA, then checks the installed GPU software (the long step) |
+| 401 | installs CUDA, then checks the installed GPU software (the long step) |
 | 402 | GPU health: the GPUs are visible, with temperature and link status |
 | 414 | copy bandwidth between the host and the GPU, measured at 256 MiB |
 
-**Smoke is a wiring check.** It shows that each benchmark installs, runs and
-records its results. Most smoke runs use small sizes, so their numbers are not
-for reports: for example, the 415 (GPU memory bandwidth) smoke arrays fit in
-GPU cache and do not measure HBM. Quote `baseline` or `extended` results.
+401 installs CUDA only. It does not install the NVIDIA driver and does not
+restart the machine.
 
-The first GPU run takes much longer than later ones: 401 installs the NVIDIA driver and CUDA,
-and each benchmark installs its own software the first time. The install may
-restart the machine once. If it does:
+When all three pass, it ends like this:
 
-1. Log in again as root. Setup continues on its own after the restart.
-2. To watch it: `tail -f /opt/benchmarks/401-*/results/install_status.txt`
-   (Ctrl+C stops watching, not setup).
-3. Run the same command again. If it says setup is still running, wait a few
-   minutes and run it again. Benchmarks already installed are not installed
-   again.
+```text
+======================================================================
+SUMMARY: 3 of 3 runs finished: 3 passed, 0 failed
+Started:       Mon Oct 19 22:07:13 UTC 2026
+Completed:     Mon Oct 19 22:13:14 UTC 2026
+Total runtime: 0 hours 6 minutes 1 seconds
+Log file:      /opt/benchmarks/benchmark_suite_log/run_benchmark_suite_<host>_20261019_220713.log
+======================================================================
+```
 
-Each run prints a short block, and the suite ends with a pass/fail summary.
-The full output is in `/opt/benchmarks/benchmark_suite_log/`.
+### 3. Smoke is a wiring check, not a measurement
 
-To run a single benchmark with its output on screen:
+Smoke shows that each benchmark installs, runs and records its results. Most
+smoke runs use small sizes, so their numbers are not for reports: for example,
+the 415 (GPU memory bandwidth) smoke arrays fit in GPU cache and do not
+measure HBM. Quote `baseline` or `extended` results. Smoke is short for most
+benchmarks, but the AI benchmarks (423 to 432) download models the first
+time, so their first smoke run takes longer.
+
+### 4. Run one benchmark
+
+Each benchmark installs its own software the first time it runs, so a first
+run takes longer than later ones. Each run prints a short block, and the suite
+ends with the summary shown above. The full output is in
+`/opt/benchmarks/benchmark_suite_log/`. To run a single benchmark with its
+output on screen:
 
 ```bash
 ./run_benchmark_suite.sh -w 405 -p smoke --show-output      # benchmark 405, smoke profile
