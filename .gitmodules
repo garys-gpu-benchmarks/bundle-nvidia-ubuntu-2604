@@ -48,6 +48,7 @@
 	url = ../416-gpu-bench-nvidia-nccl-bandwidth-test-ubu2604.git
 [submodule "417-gpu-bench-nvidia-gemm-cublas-micro-ubu2604"]
 	path = 417-gpu-bench-nvidia-gemm-cublas-micro-ubu2604
+	url = ../417-gpu-bench-nvidia-gemm-cublas-micro-ubu2604.git
 [submodule "418-gpu-bench-nvidia-cudnn-convolution-micro-ubu2604"]
 	path = 418-gpu-bench-nvidia-cudnn-convolution-micro-ubu2604
 	url = ../418-gpu-bench-nvidia-cudnn-convolution-micro-ubu2604.git
