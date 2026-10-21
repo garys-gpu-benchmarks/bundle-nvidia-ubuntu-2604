@@ -1,7 +1,7 @@
 # NVIDIA CUDA - Ubuntu 26.04 benchmark bundle
 
 32 system and GPU benchmarks for NVIDIA GPU machines running Ubuntu 26.04,
-each pinned to its tested v1.0.18 release.
+each pinned to its tested v1.0.19 release.
 
 Use this bundle only on that platform. The others have their own bundle:
 [AMD 24.04](https://github.com/garys-gpu-benchmarks/bundle-amd-ubuntu-2404) ·
@@ -46,7 +46,7 @@ the summary's last line.
 
 ```bash
 cd /opt/benchmarks
-./run_benchmark_suite.sh -w 407 -p smoke --show-output
+./run_benchmark_suite.sh -w 407 --smoke --show-output
 ```
 
 407 is STREAM, CPU memory bandwidth. It installs only a compiler and its own
@@ -74,8 +74,8 @@ The first time, 401 installs CUDA, which takes 5 to 20 minutes. Run it
 either way:
 
 ```bash
-./run_benchmark_suite.sh -w 401,402,414 -p smoke --show-output   # shows progress while CUDA installs
-./run_benchmark_suite.sh -w 401,402,414 -p smoke                 # quiet: prints nothing for 5 to 20 minutes
+./run_benchmark_suite.sh -w 401,402,414 --smoke --show-output   # shows progress while CUDA installs
+./run_benchmark_suite.sh -w 401,402,414 --smoke                 # quiet: prints nothing for 5 to 20 minutes
 ```
 
 In quiet mode, watch progress from a second window with
@@ -120,8 +120,8 @@ ends with the summary shown above. The full output is in
 output on screen:
 
 ```bash
-./run_benchmark_suite.sh -w 405 -p smoke --show-output      # benchmark 405, smoke profile
-./run_benchmark_suite.sh -w 405 -p baseline --show-output   # the standard profile
+./run_benchmark_suite.sh -w 405 --smoke --show-output      # benchmark 405, smoke profile
+./run_benchmark_suite.sh -w 405 --baseline --show-output   # the standard profile
 ```
 
 ## See your results
@@ -146,20 +146,20 @@ It takes many hours.
 ```bash
 tmux new -s bench
 cd /opt/benchmarks
-./run_benchmark_suite.sh -p smoke,baseline,extended
+./run_benchmark_suite.sh --smoke --baseline --extended
 ```
 
 This runs all 32 benchmarks with the `smoke` profile, then all with
-`baseline`, then all with `extended`. Without `-p`, `./run_benchmark_suite.sh`
-runs the `smoke` profile only. Detach with **Ctrl+B** then **D**;
-reattach later with `tmux attach -t bench`.
+`baseline`, then all with `extended`. With no profile option,
+`./run_benchmark_suite.sh` runs the `smoke` profile only. Detach with
+**Ctrl+B** then **D**; reattach later with `tmux attach -t bench`.
 
 Run "Getting started" first on a new machine, so the one-time install (and any
 restart) happens before the long run.
 
 | Option | What it does |
 |---|---|
-| `-p baseline` | profiles to run, in order (`smoke`, `baseline`, `extended`; comma-separated). Default: `smoke` |
+| `--baseline` | profile to run: `--smoke`, `--baseline` or `--extended`; give more than one to run them in that order. Default: `--smoke` |
 | `-w 401,407,421` | only these benchmarks; ranges work too: `-w 401-410` |
 | `-r 20` | repeat the whole set 20 times (soak test) |
 | `--fail-fast` | stop at the first failed run |
