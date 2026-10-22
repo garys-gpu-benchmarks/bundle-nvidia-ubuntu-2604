@@ -1,7 +1,7 @@
 # NVIDIA CUDA - Ubuntu 26.04 benchmark bundle
 
 32 system and GPU benchmarks for NVIDIA GPU machines running Ubuntu 26.04,
-each pinned to its tested v1.0.21 release.
+each pinned to its tested v1.0.22 release.
 
 Use this bundle only on that platform. The others have their own bundle:
 [AMD 24.04](https://github.com/garys-gpu-benchmarks/bundle-amd-ubuntu-2404) ·
@@ -106,8 +106,9 @@ Log file:      /opt/benchmarks/benchmark_suite_log/run_benchmark_suite_<host>_20
 
 Smoke shows that each benchmark installs, runs and records its results. Most
 smoke runs use small sizes, so their numbers are not for reports: for example,
-the 415 (GPU memory bandwidth) smoke arrays fit in GPU cache and do not
-measure HBM. Quote `baseline` or `extended` results. Smoke is short for most
+420 (HPL FP64) smoke solves a 4096 x 4096 system, too small to load the GPU,
+and 415 (GPU memory bandwidth) smoke runs only 20 iterations. Quote
+`baseline` or `extended` results. Smoke is short for most
 benchmarks, but the AI benchmarks (423 to 432) download models the first
 time, so their first smoke run takes longer.
 
