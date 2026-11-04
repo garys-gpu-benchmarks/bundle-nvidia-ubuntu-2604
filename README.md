@@ -1,7 +1,7 @@
 # NVIDIA CUDA - Ubuntu 26.04 benchmark bundle
 
 32 system and GPU benchmarks for NVIDIA GPU machines running Ubuntu 26.04,
-each pinned to its tested v1.0.23 release.
+each pinned to its tested v1.0.24 release.
 
 Use this bundle only on that platform. The others have their own bundle:
 [AMD 24.04](https://github.com/garys-gpu-benchmarks/bundle-amd-ubuntu-2404) ·
@@ -137,6 +137,22 @@ cd /opt/benchmarks
 ./show_metrics.sh --help             # all options
 ```
 
+To list every run on this machine (workload, profile, runtime, exit code)
+without copying anything:
+
+```bash
+./show_ledger_runs.sh              # every run
+./show_ledger_runs.sh --failed     # only runs whose exit code is not 0
+```
+
+To copy every result on this machine into one folder (the ledger as a
+timestamped CSV, each benchmark's `results/raw` and `results/parsed`, and the
+suite logs):
+
+```bash
+./get_benchmark_results.sh -o ~/results    # no --host: collects from this machine
+```
+
 To copy the results to your laptop, see [Results](#results).
 
 ## Run everything
@@ -195,13 +211,14 @@ expected:
 | Which release is installed | `git -C /opt/benchmarks describe --tags` |
 
 To copy the ledger, every benchmark's `results/` and the suite logs to your
-laptop (Git Bash on Windows), use `get_remote_info.sh` from
+laptop (Git Bash on Windows), use `get_benchmark_results.sh` from
 [gpu-bench-suite](https://github.com/garys-gpu-benchmarks/gpu-bench-suite). It writes
 `RUNTIME_LEDGERS/` and `DIRECTORIES/` in the folder you run it from:
 
 ```bash
 git clone https://github.com/garys-gpu-benchmarks/gpu-bench-suite && cd gpu-bench-suite
-./scripts/get_remote_info.sh --host 203.0.113.10       # this machine's address; --port PORT if ssh is not on 22
+./scripts/show_ledger_runs.sh --host 203.0.113.10     # just the run table; copies nothing
+./scripts/get_benchmark_results.sh --host 203.0.113.10  # this machine's address; --port PORT if ssh is not on 22
 ./scripts/show_metrics.sh 407 --host 203.0.113.10      # the same table, read over ssh
 ```
 
