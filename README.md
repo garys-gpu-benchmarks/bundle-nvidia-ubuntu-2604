@@ -1,7 +1,7 @@
 # NVIDIA CUDA - Ubuntu 26.04 benchmark bundle
 
 32 system and GPU benchmarks for NVIDIA GPU machines running Ubuntu 26.04,
-each pinned to its tested v1.0.30 release. Other platforms have their own bundle:
+each pinned to its tested v1.0.31 release. Other platforms have their own bundle:
 [AMD 24.04](https://github.com/garys-gpu-benchmarks/bundle-amd-ubuntu-2404) ·
 [NVIDIA 24.04](https://github.com/garys-gpu-benchmarks/bundle-nvidia-ubuntu-2404) ·
 [AMD 26.04](https://github.com/garys-gpu-benchmarks/bundle-amd-ubuntu-2604)
@@ -82,7 +82,7 @@ cd /opt/benchmarks && ./run_benchmark_suite.sh --smoke --baseline --extended
 
 To pull results to your laptop (Git Bash on Windows works), clone
 [gpu-bench-suite](https://github.com/garys-gpu-benchmarks/gpu-bench-suite) and run
-`./scripts/get_benchmark_results.sh --host <address>` (add `--port N` if ssh is not on 22).
+`./get_benchmark_results.sh --host <address>` (add `--port N` if ssh is not on 22).
 `list_runs.sh` and `show_metrics.sh` there accept `--host` too.
 
 ## Reading the results
